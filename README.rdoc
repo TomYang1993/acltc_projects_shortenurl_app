@@ -1,27 +1,13 @@
 == README
+URL Shortener App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You will be creating a brand new Rails app that serves as a URL Shortener service. You're probably familiar with other such services such as bit.ly, but now you'll be creating your own! If you're not at all familiar with URL Shortening, check out article, but at its core, a URL Shortening solves the following problem: Imagine you have a url that you want to easily distribute (examples: on a physical paper flyer, or on Twitter) but the url is crazy long, as some urls tend to be. A URL Shortening service allows you to create a shortened url (e.g. http://mydomain.com/abcde) that when people visits it, they will be redirected to the real, longer url. This way you can simply distribute the short url, but people will end up at the right place. Another advantage of distributing shortened urls is that you can track how many people visited each one. This can be useful for marketing purposes. Imagine you have an advertisement on two different billboards, and you use a different shortened url on each. Now you can see how many people visited each url, and therefore learn which billboard is more effective.
 
-Things you may want to cover:
+Anyway, you'll be building this very service - where a user can sign up and have the ability to create shortened urls. The one thing is that instead of these shortened urls starting with http://bit.ly/... they'll start with localhost:3000//... or whatever domain you get if you deploy this app to Heroku. If you were to create this for real, you'd acquire a very short domain name so that your complete urls remain short.
 
-* Ruby version
+This repo contains a somewhat old version of a completed version of this app. The idea is that it's here as a reference if you get stuck, but you'd try to build this on your own without looking at the source code here.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Below is a guide that will help guide you through the building of this app. Note that in some steps, the guide will walk you through some of the nitty gritty details, but in most steps, it will just tell you what to build without even giving hints.
 
 
 Please feel free to use a different markup language if you do not plan to run
