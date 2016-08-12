@@ -18,7 +18,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/links">URL Shorten</a>
+      <a class="navbar-brand" href="<%= links_path %>">URL Shorten</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -29,9 +29,11 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Backstage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="links/new">create a new link</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+              <li><a href="<%= new_link_path %>">create a new link</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li role="separator" class="divider"></li>
@@ -46,15 +48,23 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <%  if current_user  %>
+        <li><a href="<%= links_path %>">Welcome, Dear user <%= current_user.email  %> !</a></li>
+        <% else %>
+        <li><a href="/users/sign_up">Welcome, Dear guest ! Please sign up or log in !</a></li>
+        <% end %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/users/sign_in">Log In</a></li>
-            <li><a href="/users/sign_out">Sign Out</a></li>
-            <li><a href="/users/sign_up">Sign Up</a></li>
+            <% if !current_user %>
+              <li><a href="/users/sign_in">Log In</a></li>
+              <li><a href="/users/sign_up">Sign Up</a></li>
+            <% end %>
+            <% if current_user %>
+              <li><a href="/users/sign_out">Sign Out</a></li>
+            <% end %>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="/users/edit">Edit profile</a></li>
           </ul>
         </li>
       </ul>
@@ -62,13 +72,31 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<% if flash.is_a?(Array) %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@link.errors.count, "error") %> prohibited this post from being saved:</h2>
 
+    <ul>
+    <% @link.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
 
   <% flash.each do |name, message| %>
     <div class="alert alert-<%= name %> alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <%= message %>
+        <% if message.is_a?(Array) %>
+          <% message.each do |msg| %>
+              <ul>
+                  <li> <%= msg %>  </li>
+              </ul>
+          <% end %>
+        <% else %>
+          <%= message %>
+        <% end %>
     </div>
   <% end %>
 

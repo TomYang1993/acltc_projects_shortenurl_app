@@ -1,16 +1,41 @@
-<h1>Here are all the links you have</h1>
+<h2>Dear user, hit links on slug to go to your target website!</h1>
+<br>
+<br>
 
-<table style="width:100%">
-  <tr>
-    <th>Slug</th>
-    <th>Target URL</th>
-    <th>Created At</th>
-  </tr>
-  <% @links.each do |link| %>
-    <tr>
-      <td><%= link.slug %></td>
-      <td><%= link.target_url %></td>
-      <td><%= link.created_at %></td>
-    </tr>
-  <% end %>
+
 <table>
+
+  <table class="table">
+    <thead >
+      <tr class="bg-info">
+        <th>#</th>
+        <th>Slug</th>
+        <th>Details</th>
+        <th>Created at</th>
+      </tr>
+    </thead>
+
+    <% if @links.count == 0 %>
+      <h3> You have no links yet!</h3>
+    <% end %>
+    <tbody>
+
+  <% @links.each do |link| %>
+      <tr>
+        <th scope="row">1</th>
+        <td><a href="/<%= link.slug %>"><%= link.slug %></a></td>
+        <td>
+           <div class="btn-group" role="group" aria-label="...">
+             <a href="/links/<%= link.id %>" class="btn btn-primary" role="button" >details</a>
+             <a href="/links/<%= link.id %>/edit" class="btn btn-warning" role="button" >edit</a>
+             <a href="/links/<%= link.id %>" class="btn btn-danger" role="button" >delete</a>
+
+            </div>
+        </td>
+        <td><%= link.created_at %></td>
+
+      </tr>
+   <% end %>
+
+    </tbody>
+  </table>

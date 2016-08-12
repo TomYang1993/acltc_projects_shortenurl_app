@@ -1,6 +1,6 @@
-<h1>Please add a new link:</h1>
+<h1>Please update your link:</h1>
 
-<%= form_tag("/links", method: :post) do %>
+<%= form_tag("/links/#{@link.id}", method: :patch) do %>
 <ul>
   <li>
     <%=  label_tag(:slug)%>
@@ -11,5 +11,5 @@
     <%= text_field_tag(:target_url) %>
   </li>
 </ul>
-  <%= submit_tag("create!") %>
+  <%= submit_tag("update!") %>
 <% end %>
