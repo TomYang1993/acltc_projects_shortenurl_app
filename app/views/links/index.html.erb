@@ -15,27 +15,32 @@
       </tr>
     </thead>
 
-    <% if @links.count == 0 %>
+    <% if  !@links || @links.count == 0  %>
       <h3> You have no links yet!</h3>
-    <% end %>
+
+    <% else %>
+
     <tbody>
+      <% @links.each do |link| %>
+          <tr>
+            <th scope="row">1</th>
+              <td><a href="/<%= link.slug %>"><%= link.slug %></a></td>
+              <td>
+                 <div class="btn-group" role="group" aria-label="...">
+                   <a href="/links/<%= link.id %>" class="btn btn-primary" role="button" >details</a>
+                   <a href="/links/<%= link.id %>/edit" class="btn btn-warning" role="button" >edit</a>
+                   <%= link_to "delete", "/links/#{link.id}" ,method: :delete ,class: "block-link"%>
+                  </div>
+              </td>
+              <td><%= link.created_at %></td>
+          </tr>
 
-  <% @links.each do |link| %>
-      <tr>
-        <th scope="row">1</th>
-        <td><a href="/<%= link.slug %>"><%= link.slug %></a></td>
-        <td>
-           <div class="btn-group" role="group" aria-label="...">
-             <a href="/links/<%= link.id %>" class="btn btn-primary" role="button" >details</a>
-             <a href="/links/<%= link.id %>/edit" class="btn btn-warning" role="button" >edit</a>
-             <a href="/links/<%= link.id %>" class="btn btn-danger" role="button" >delete</a>
-
-            </div>
-        </td>
-        <td><%= link.created_at %></td>
-
-      </tr>
+      <% end %>
    <% end %>
 
     </tbody>
   </table>
+
+  <div>
+    <a href="/links/new" class="btn btn-info" role="button" >Add a new link</a>
+  </div>

@@ -6,7 +6,10 @@ class VisitsController < ApplicationController
       ip_address: request.remote_ip
     )
     visit.save
-    redirect_to "http://#{@link.target_url}"
-
+    if @link
+      redirect_to "http://#{@link.target_url}"
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 end
